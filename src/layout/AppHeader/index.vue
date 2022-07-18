@@ -1,16 +1,16 @@
 <template>
   <div class='header-container'>
     <span class='logo'>
-      <el-icon><Eleme /></el-icon>
+      <el-icon><ElemeFilled /></el-icon>
       积云编程
     </span>
-    <!--    左侧菜单伸缩-->
+    <!--左侧菜单伸缩-->
     <div class='icon-button'>
       <el-icon>
         <Fold />
       </el-icon>
     </div>
-    <!--    刷新-->
+    <!--刷新-->
     <el-tooltip
       content='刷新'
       placement='bottom'
@@ -20,7 +20,7 @@
       </el-icon>
     </el-tooltip>
     <div>
-      <!--      全屏-->
+      <!--全屏-->
       <div class='right-container'>
         <el-tooltip
           :content='screenfullTltle'
@@ -31,7 +31,7 @@
             <Aim v-else />
           </el-icon>
         </el-tooltip>
-        <!--        下拉-->
+        <!--下拉-->
         <el-dropdown trigger='click' @command='handleCommand'>
         <span class='el-dropdown-link'>
           <el-avatar :size='30'></el-avatar>
@@ -47,7 +47,7 @@
         </el-dropdown>
       </div>
     </div>
-    <!--    修改密码抽屉-->
+    <!--修改密码抽屉-->
     <el-drawer v-model='drawer' title='修改密码'>
       <el-form ref='formRef' :model='editPasswordFormModel' :rules='rules' label-width='100px'>
         <el-form-item label='旧密码' prop='oldPassword'>
