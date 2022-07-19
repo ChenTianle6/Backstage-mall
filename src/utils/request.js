@@ -1,92 +1,81 @@
 import axios from 'axios'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-import { ElMessage } from 'element-plus'
+import loading from '@/utils/loading'
+import { ElNotification } from 'element-plus'
 import store from '@/store'
-// 创建axios实例
-const instance = axios.create({
-  baseURL: process.env.VUE_APP_API,
-  timeout: 5000
-})
 
+const instance = axios.create({
+  baseURL: process.env.VUE_APP_BASE_API,
+  timeout: 6000
+})
 // 添加请求拦截器
+
 instance.interceptors.request.use(
-  (config) => {
-    NProgress.start()
+  function(config) {
+    // TODO 添加token
+    // loading 可选 全屏loading和加载进度条
+    // loading.elLoading.start()
     const token = store.getters.token
-    if (token) {
-      config.headers.token = token
-    }
-    // 在发送请求之前做些什么
+    if (token) config.headers.token = token
+    loading.nprogress.start()
+    store.commit('viewLoading/startLoading')
     return config
   },
-  (error) => {
-    NProgress.done()
+  function(error) {
     // 对请求错误做些什么
     return Promise.reject(error)
   }
 )
-
 // 添加响应拦截器
 instance.interceptors.response.use(
-  (response) => {
-    NProgress.done()
+  function(response) {
     // 对响应数据做点什么
-    const {
-      status,
-      data: { msg, data }
-    } = response
-    if (status === 200) {
+    // loading.elLoading.done()
+    loading.nprogress.done()
+    store.commit('viewLoading/closeLoading')
+    const { status, data: { data, msg } } = response
+    if (status === 200 || msg === 'ok') {
       return data
     }
-    _showError(msg)
-    return Promise.reject(msg)
   },
-  (error) => {
-    NProgress.done()
-    const { message } = error
-    if (message.includes('Network Error')) {
-      _showError('网络错误')
-      return Promise.reject(message)
+  function(error) {
+    // 对响应错误做点什么
+    loading.nprogress.done()
+    store.commit('viewLoading/closeLoading')
+    const msg = error.toString()
+    if (msg.includes('NetWork')) {
+      ElNotification.error('网络错误，请检查您的网络！')
     }
-    if (message.includes('timeout')) {
-      _showError('请求超时')
-      return Promise.reject(message)
+    if (msg.includes('Timeout')) {
+      ElNotification.error('请求超时，请检查您的网络！')
     }
-    const {
-      status,
-      data: { msg }
-    } = error.response
+    console.log(error, 'error')
+    const { status } = error.response
+    const messageError = error.response.data.msg
     switch (status) {
-      case 401:
-        _showError('登录已过期，请重新登录')
+      case 400:
+        ElNotification.error(messageError)
         break
-      case 403:
-        _showError('没有权限')
+      case 401:
+        ElNotification.error('Token超时,请重新登录！')
+        // TODO token过期处理
+        /* store.commit('user/loginOut')
+         router.push({name: 'login'}) */
         break
       case 404:
-        _showError('请求资源不存在')
+        ElNotification.error('访问接口地址不正确！')
         break
       case 500:
-        _showError('服务器错误')
+        ElNotification.error('服务器发生错误！')
         break
-      default:
-        _showError(msg)
+      case 503:
+        ElNotification.error('服务暂时不可用！')
+        break
+      case 408:
+        ElNotification.error('客户端请求超时!')
+        break
     }
-    // 对响应错误做点什么
     return Promise.reject(error)
   }
 )
 
-const _showError = (msg) => {
-  ElMessage.error(msg)
-}
-
-// 统一传参
-const request = (data) => {
-  data.params =
-    data.method.toLowerCase() === 'get' ? (data.params = data.data) : {}
-  return instance(data)
-}
-
-export default request
+export default instance

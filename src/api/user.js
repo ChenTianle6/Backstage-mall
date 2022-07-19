@@ -1,34 +1,20 @@
-import request from '@/utils/request'
+import request from '../utils/request'
 
 /**
- * 用户登录
- * @param data
- * @returns {AxiosPromise}
+ * login
+ * @returns
  */
-export const loginAPI = (data) => {
-  return request({
-    url: '/login',
-    method: 'post',
-    data
-  })
+const login = (data) => {
+  return request({ url: '/admin/login', method: 'POST', data })
 }
-/**
- * 用户信息
- * @returns {AxiosPromise}
- */
-export const userInfoAPI = () => {
-  return request({
-    url: '/getinfo',
-    method: 'POST'
-  })
+const getUserInfo = () => {
+  return request({ url: '/admin/getinfo', method: 'POST' })
 }
-/**
- * 退出登录
- * @returns {AxiosPromise}
- */
-export const logoutAPI = () => {
-  return request({
-    url: '/logout',
-    method: 'POST'
-  })
+const logout = () => {
+  return request({ url: '/admin/logout', method: 'POST' })
+}
+export default {
+  login,
+  getUserInfo,
+  logout
 }

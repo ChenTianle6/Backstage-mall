@@ -1,53 +1,78 @@
-import { loginAPI, userInfoAPI, logoutAPI } from '@/api/user'
-import { setItem, getItem } from '@/utils/storage'
-import { TOKEN } from '@/utils/constants'
+/**
+ * @author MaZiXiao
+ * @date 2022-07-15 19:04
+ */
+import { getItem, setItem } from '@/utils/storage'
+import { MENUS_LIST, TAGS_VIEW_KEY, TOKEN_KEY } from '@/utils/publicVariable'
+import USER_API from '@/api/user'
+import { ElNotification } from 'element-plus'
 import router from '@/router'
-import { Notification } from '@/utils/Notification'
 
 export default {
   namespaced: true,
-  state: () => ({
-    token: getItem(TOKEN) || '',
-    userInfo: {}
-  }),
+  state: {
+    token: getItem(TOKEN_KEY) || '',
+    userInfo: {},
+    menus: getItem(MENUS_LIST) || [],
+    ruleNames: []
+  },
   mutations: {
     setToken(state, token) {
       state.token = token
-      setItem(TOKEN, token)
+      setItem(TOKEN_KEY, token)
     },
-    setUserInfo(state, userInfo) {
-      state.userInfo = userInfo
+    setUserInfo(state, payload) {
+      state.userInfo = payload
+    },
+    setMenus(state, payload) {
+      state.menus = payload
+      setItem(MENUS_LIST, payload)
+    },
+    setRuleNames(state, payload) {
+      state.ruleNames = payload
     }
   },
   actions: {
     async login({ commit }, data) {
       try {
-        const { token } = await loginAPI(data)
-        commit('setToken', token)
-        Notification('登录成功', '', 'success')
-        router.push('/')
-      } catch (e) {
-        console.log(e, 'vuex/user')
+        const res = await USER_API.login(data)
+        if (res.token) {
+          commit('setToken', res.token)
+          await router.push('/')
+          ElNotification.success('登录成功！')
+        }
+        return res
+      } catch (error) {
+        console.log(error)
       }
     },
     async getUserInfo({ commit }) {
       try {
-        const { data } = await userInfoAPI()
-        commit('setUserInfo', data)
-      } catch (e) {
-        console.log(e, 'vuex/user')
+        const res = await USER_API.getUserInfo()
+        await commit('setMenus', res.menus)
+        await commit('setRuleNames', res.ruleNames)
+        await commit('setUserInfo', {
+          avatar: res.avatar,
+          id: res.id,
+          role: res.role,
+          super: res.super,
+          username: res.username
+        })
+        return res
+      } catch (error) {
+
       }
     },
-    async userLogout({ commit }) {
-      try {
-        await logoutAPI()
-        commit('setToken', '')
-        commit('setUserInfo', {})
-        Notification('退出登录成功', '', 'success')
-        router.push('/login')
-      } catch (e) {
-        console.log(e, 'vuex/user')
-      }
+    async logout({ commit }) {
+      await USER_API.logout()
+      setItem(TOKEN_KEY, '')
+      setItem(TAGS_VIEW_KEY, [])
+      await commit('setMenus', [])
+      await commit('setRuleNames', [])
+      await commit('setUserInfo', {})
+      await window.location.reload()
+      ElNotification.success('退出成功！')
     }
+
   }
 }

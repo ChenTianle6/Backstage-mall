@@ -1,43 +1,47 @@
 <template>
-  <el-container>
-    <el-header>
-      <AppHeader />
+  <el-container class='w-100 h-100'>
+    <el-header class='d-flex justify-content-between align-items-center'>
+      <app-header></app-header>
     </el-header>
-    <el-container>
-      <el-aside width='250px'>
-        <AppAside />
+    <el-container class='mainmain'>
+      <el-aside :width="$store.getters.collapse?'64px':'250px'">
+        <app-aside></app-aside>
       </el-aside>
       <el-main>
-        <AppMain />
+        <app-main></app-main>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script setup>
-import AppHeader from './AppHeader'
-import AppAside from './AppAside'
-import AppMain from './AppMain'
-</script>
+import AppAside from './Aside'
+import AppMain from './Main'
+import AppHeader from './Header'</script>
+<style scoped lang='scss'>
+.el-header {
+  background-color: rgb(67, 56, 202);
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 
-<style lang='scss' scoped>
-.el-container {
-  height: 100%;
+.mainmain {
+  margin-top: 60px;
+  overflow: auto;
+}
 
-  .el-header {
-    background: #4338ca;
-    height: 64px;
-  }
+.el-aside {
+  background-color: #fff;
+  transition: all .3s;
+}
 
-  & > .el-container {
-    .el-aside {
-      transition: all 2s;
-      background: #fdfdfd;
-    }
+.el-main {
+  background-color: rgb(229, 231, 235);
+  padding: 5px;
+}
 
-    .el-main {
-      background: #f3f4f6;
-    }
-  }
+::-webkit-scrollbar {
+  display: none;
 }
 </style>
