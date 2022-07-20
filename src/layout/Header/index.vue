@@ -40,7 +40,7 @@
       </el-tooltip>
     </div>
     <el-avatar size='small'
-               src='https://c-ssl.dtstatic.com/uploads/blog/202011/03/20201103213634_e3959.thumb.1000_0.jpeg'
+               src='https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
     />
     <el-dropdown>
     <span class='el-dropdown-link'>
