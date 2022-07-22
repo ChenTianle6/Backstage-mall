@@ -1,7 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-15 17:06
- */
 module.exports = {
   // 可选类型
   types: [

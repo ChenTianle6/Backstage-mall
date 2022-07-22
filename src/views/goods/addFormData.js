@@ -1,19 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-18 14:03
- */
-/*
-* category_id: 5
-cover: "http://tangzhe123-com.oss-cn-shenzhen.aliyuncs.com/public/62d3c585ad19a.jpg"
-desc: "111"
-min_oprice: "6"
-min_price: "16"
-min_stock: 10
-status: 1
-stock: 100
-stock_display: 1
-title: "测试测试测试"
-unit: "件" */
 export const addFormData = {
   title: {
     label: '商品名称',
@@ -119,11 +103,6 @@ export const addFormData = {
     ]
   }
 }
-/* cprice: "12"
-oprice: "12"
-pprice: "123"
-volume: "12"
-weight: "12" */
 export const skuFormData = {
   cprice: {
     label: '市场价格',

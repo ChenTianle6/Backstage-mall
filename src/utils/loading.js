@@ -1,10 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-15 17:06
- */
-/*
-* @配置nprogress进度条loading
-*  */
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { ElLoading } from 'element-plus'

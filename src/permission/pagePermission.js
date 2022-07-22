@@ -1,7 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-15 19:31
- */
 import router from '@/router'
 import store from '@/store'
 import { dynamicRouting } from '@/utils/dynamicRouting'

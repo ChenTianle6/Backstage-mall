@@ -1,6 +1,5 @@
 <template>
-  <div>img
-  </div>
+  <div>图片管理</div>
 </template>
 
 <script setup>

@@ -1,10 +1,10 @@
 <template>
   <el-row :gutter='20'>
-    <el-col :span='8'>
+    <el-col :span='16'>
       <span class='title' v-if="showLayout('search')">关键词</span>
-      <a-input v-model:value='keyword' placeholder='输入名称' v-if="showLayout('search')" />
+      <a-input class="input-box" v-model:value='keyword' placeholder='商品名称' v-if="showLayout('search')" />
     </el-col>
-    <el-col :span='8'>
+    <!-- <el-col :span='8'>
       <span class='title' v-if="showLayout('select')">分类</span>
       <a-select
         ref='select'
@@ -15,15 +15,15 @@
         <a-select-option :value='item.id' :key='index' v-for='(item,index) in props.selOptions'>{{ item.name }}
         </a-select-option>
       </a-select>
-    </el-col>
+    </el-col> -->
     <el-col :span='4'>
     </el-col>
     <el-col :span='4'>
-      <a-button size='small' type='primary' @click='search' v-if="showLayout('searchBtn')">搜索</a-button>
-      <a-button size='small' @click='resetForm' v-if="showLayout('searchBtn')">重置</a-button>
-      <a-button size='small' @click='showSelect=!showSelect' v-if="showLayout('searchBtn')">{{ showSelect ? '收起' : '展开'
+      <el-button size='small' type='primary' @click='search' v-if="showLayout('searchBtn')">搜索</el-button>
+      <el-button size='small' @click='resetForm' v-if="showLayout('searchBtn')">重置</el-button>
+      <el-button size='small' @click='showSelect=!showSelect' v-if="showLayout('searchBtn')">{{ showSelect ? '收起' : '展开'
         }}
-      </a-button>
+      </el-button>
     </el-col>
   </el-row>
   <el-row :gutter='20' style='margin-top: 10px'>
@@ -60,7 +60,6 @@ const props = defineProps({
     }
   },
   layout: {
-    /* ['search', 'select', 'searchBtn', 'slot', 'refresh'] */
     type: Array,
     default: () => ['search', 'select', 'searchBtn', 'slot', 'refresh']
   }
@@ -98,13 +97,23 @@ const showLayout = (type) => {
 <style lang='scss' scoped>
 .ant-input {
   width: 300px;
+  height: 20px;
+  margin-bottom: 20px;
+  margin-top: 15px;
 }
 
 .title {
   margin-right: 10px;
+  font-size: 12px;
+  margin-left: 35px;
 }
 
 .ant-btn {
   margin-right: 10px;
+}
+
+.input-box{
+  font-size: 12px;
+  height: 25px;
 }
 </style>

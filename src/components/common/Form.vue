@@ -37,7 +37,7 @@
             :value='option.id'
           />
         </el-select>
-        <!--        级联选择器-->
+        <!--级联选择器-->
         <el-cascader
           v-if="item.type==='cascader'"
           v-model='ruleForm[key]'

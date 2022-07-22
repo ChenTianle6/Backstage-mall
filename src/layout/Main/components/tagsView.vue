@@ -113,13 +113,12 @@ const handleCommand = (name) => {
 .tagsView {
   display: flex;
   justify-content: space-between;
-
+  margin-bottom: 20px;
 }
 
 .title {
   display: flex;
   overflow: auto;
-  margin: 0 5px;
   width: 90%;
   transition: all .3s;
 }

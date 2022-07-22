@@ -1,7 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-18 21:08
- */
 import request from '@/utils/request'
 
 export const addCateGory = (data) => {

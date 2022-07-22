@@ -1,7 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-17 18:39
- */
 import request from '@/utils/request'
 
 export const getClassify = () => {

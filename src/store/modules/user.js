@@ -1,7 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-15 19:04
- */
 import { getItem, setItem } from '@/utils/storage'
 import { MENUS_LIST, TAGS_VIEW_KEY, TOKEN_KEY } from '@/utils/publicVariable'
 import USER_API from '@/api/user'

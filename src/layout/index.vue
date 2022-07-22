@@ -37,8 +37,8 @@ import AppHeader from './Header'</script>
 }
 
 .el-main {
-  background-color: rgb(229, 231, 235);
-  padding: 5px;
+  background-color: rgb(245, 245, 245);
+  padding: 5px 20px;
 }
 
 ::-webkit-scrollbar {

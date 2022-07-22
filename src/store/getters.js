@@ -1,7 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-15 19:32
- */
 export default {
   token: state => state.user.token,
   userInfo: state => state.user.userInfo,

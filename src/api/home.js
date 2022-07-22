@@ -1,8 +1,3 @@
-/**
- * @author MaZiXiao
- * @date 2022-07-17 13:51
- */
-
 import request from '@/utils/request'
 
 const getStatisticsOne = () => {

@@ -50,6 +50,4 @@ const handleCurrentChange = (val) => {
 
 </style>
 <script>
-/* <pagination :page-num="pageList.page" :page-size="pageList.size" :total="pageList.total"
-@change="pageChange"></pagination> */
 </script>
