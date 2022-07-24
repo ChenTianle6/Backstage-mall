@@ -2,7 +2,6 @@
   <template v-if='!props.tree.child || props.tree.child.length<=0'>
     <el-menu-item :index='props.tree.frontpath'>
       <el-icon>
-        <!--        <svg-icon :icon='props.tree.icon'></svg-icon>-->
         <component :is='props.tree.icon'></component>
       </el-icon>
       <span>{{ props.tree.name }}</span>

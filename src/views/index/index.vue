@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <el-row :gutter='20'>
       <el-col :span='6' v-for='item in listOne' :key='item.value'>
         <el-card class='box-card' shadow='hover'>
@@ -108,10 +108,6 @@ const changeChartType = type => {
 
 </script>
 <style scoped lang='scss'>
-.home{
-  margin-top: 20px;
-  margin-left: 20px;
-}
 .card_header {
   height: 38px;
   background-color: rgb(249, 250, 251);
